@@ -22,8 +22,8 @@ public class Main {
         logger.info("** Starting Maze Runner");
         try {
             CommandLine cmd = parser.parse(options, args);
-            logger.info("**** Reading the maze from file " + cmd.getOptionValue("i", "examples/straight.maz"));
-            BufferedReader reader = new BufferedReader(new FileReader(cmd.getOptionValue("i", "examples/straight.maz")));
+            logger.info("**** Reading the maze from file " + cmd.getOptionValue("i", "examples/straight.maz.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader(cmd.getOptionValue("i", "examples/straight.maz.txt")));
             String line;
             while ((line = reader.readLine()) != null) {
                 for (int idx = 0; idx < line.length(); idx++) {
