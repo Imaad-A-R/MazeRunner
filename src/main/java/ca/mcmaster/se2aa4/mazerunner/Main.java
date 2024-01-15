@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Options;
+import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +12,7 @@ public class Main {
 
     private static final Logger logger = LogManager.getLogger();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         Options options = new Options();
         options.addOption("i", true, "Input argument for map");
         CommandLineParser parser = new DefaultParser();
@@ -38,8 +35,14 @@ public class Main {
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
+        CommandLine cmd = parser.parse(options, args);
         logger.info("**** Computing path");
+        Traverser travel = new Traverser(cmd.getOptionValue("i", "\"examples/straight.maz.txt\""));
         logger.info("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
+    }
+
+    public static String Factorize(String canonical){
+        return canonical;
     }
 }
