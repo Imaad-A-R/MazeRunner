@@ -32,17 +32,12 @@ public class Main {
                 }
                 logger.info(System.lineSeparator());
             }
+            Traverser travel = new Traverser(cmd.getOptionValue("i", "\"examples/straight.maz.txt\""));
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
-        CommandLine cmd = parser.parse(options, args);
         logger.info("**** Computing path");
-        Traverser travel = new Traverser(cmd.getOptionValue("i", "\"examples/straight.maz.txt\""));
         logger.info("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
-    }
-
-    public static String Factorize(String canonical){
-        return canonical;
     }
 }

@@ -8,4 +8,6 @@ public class Traverser {
 
     public void path() {
     }
+    public void factorize(){
+    }
 }
