@@ -16,7 +16,11 @@ public class Main {
     public static void main(String[] args) throws ParseException {
         try {
             Configure config = configuring(args);
-            Traverser travel = new Traverser(config.file_name());
+            MazeAnalyzer maze = new MazeAnalyzer(config.file_name());
+            String pathing = maze.arraymaker();
+            String factorize = maze.factorize(pathing);
+            System.out.println(pathing);
+            System.out.println(factorize);
         } catch(ParseException | IOException e) {
             logger.error("/!\\ An error has occured /!\\");
         }
@@ -28,7 +32,7 @@ public class Main {
 
     private record Configure(String file_name){
         Configure{
-            if (!(file_name.endsWith("maz.txt"))){
+            if (!(file_name.endsWith(".maz.txt"))){
                 throw new IllegalArgumentException("Please enter a valid file");
             }
         }
