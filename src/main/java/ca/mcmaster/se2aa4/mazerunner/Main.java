@@ -30,7 +30,7 @@ public class Main {
     }
 
 
-    private record Configure(String file_name, int maze_length, int maze_width){
+    private record Configure(String file_name, String test_path, int maze_length, int maze_width){
         Configure{
             if (!(file_name.endsWith(".maz.txt"))){
                 throw new IllegalArgumentException("Please enter a valid file");
@@ -39,10 +39,12 @@ public class Main {
                 throw new IllegalArgumentException("Maze is too large");
             }
         }
+
     }
     private static Configure configuring(String []args) throws IOException, ParseException {
         Options options = new Options();
         options.addOption("i", true, "Input argument for map");
+        options.addOption("p", true, "Test a specific path");
         CommandLineParser parser = new DefaultParser();
         logger.info("** Starting Maze Runner");
         CommandLine cmd = parser.parse(options, args);
@@ -62,6 +64,6 @@ public class Main {
             logger.info(System.lineSeparator());
             width++;
         }
-        return new Configure(cmd.getOptionValue("i", "examples/straight.maz.txt"), length, width);
+        return new Configure(cmd.getOptionValue("i", "examples/straight.maz.txt"), cmd.getOptionValue("p", "null"), length, width);
     }
 }
