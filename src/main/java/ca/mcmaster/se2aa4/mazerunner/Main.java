@@ -28,8 +28,6 @@ public class Main {
         } catch(ParseException | IOException e) {
             logger.error("/!\\ An error has occured /!\\");
         }
-        logger.info("**** Computing path");
-        logger.info("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
     }
 
