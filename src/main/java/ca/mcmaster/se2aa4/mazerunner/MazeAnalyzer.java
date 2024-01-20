@@ -23,15 +23,13 @@ public class MazeAnalyzer {
             }
             j++;
         }
-        //print maze to verify maze was converted successfully. convert nulls to spaces.
+        //convert nulls to spaces.
         for (int i=0; i < maze.length; i++){
             for (int k=0; k<maze[0].length; k++){
                 if (maze[i][k]==null){
                     maze[i][k]=" ";
                 }
-                System.out.print(maze[i][k]);
             }
-            System.out.println();
         }
         //define traverser objects and find start and end indexes
         Traverser travel = new Traverser(maze);

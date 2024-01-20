@@ -19,12 +19,7 @@ public class Main {
             MazeAnalyzer maze = new MazeAnalyzer();
             String pathing = maze.arraymaker(config.file_name(), config.maze_length(), config.maze_width());
             String factorize = maze.factorize(pathing);
-            if (pathing.equals("We crashed!")){
-                System.out.println("The maze was not a straight maze, so we crashed into a wall (Traversal coming soon!)");
-            }
-            else{
-                System.out.println("Starting from the entry point on the left, the path to solve the maze is: "+pathing);
-            }
+            System.out.println(pathing);
         } catch(ParseException | IOException e) {
             logger.error("/!\\ An error has occured /!\\");
         }
