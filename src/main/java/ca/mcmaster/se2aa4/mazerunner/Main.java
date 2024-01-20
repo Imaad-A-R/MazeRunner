@@ -39,7 +39,7 @@ public class Main {
             if (!(file_name.endsWith(".maz.txt"))){
                 throw new IllegalArgumentException("Please enter a valid file");
             }
-            else if (maze_length>100 || maze_width>100){
+            else if (maze_length>1000 || maze_width>1000){
                 throw new IllegalArgumentException("Maze is too large");
             }
         }
