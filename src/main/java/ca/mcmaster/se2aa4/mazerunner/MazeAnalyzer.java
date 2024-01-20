@@ -37,7 +37,7 @@ public class MazeAnalyzer {
         Traverser travel = new Traverser(maze);
         int start = travel.findStart(maze);
         int end = travel.findEnd(maze);
-        return travel.path();
+        return travel.path(maze, start, end);
     }
     public String factorize(String canonical){
         return "factor placeholder";

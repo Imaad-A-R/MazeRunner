@@ -19,8 +19,12 @@ public class Main {
             MazeAnalyzer maze = new MazeAnalyzer();
             String pathing = maze.arraymaker(config.file_name(), config.maze_length(), config.maze_width());
             String factorize = maze.factorize(pathing);
-            System.out.println(pathing);
-            System.out.println(factorize);
+            if (pathing.equals("We crashed!")){
+                System.out.println("The maze was not a straight maze, so we crashed into a wall (Traversal coming soon!)");
+            }
+            else{
+                System.out.println("Starting from the entry point on the left, the path to solve the maze is: "+pathing);
+            }
         } catch(ParseException | IOException e) {
             logger.error("/!\\ An error has occured /!\\");
         }
@@ -54,14 +58,8 @@ public class Main {
         int length=0, width=0;
         while ((line = reader.readLine()) != null) {
             for (int idx = 0; idx < line.length(); idx++) {
-                if (line.charAt(idx) == '#') {
-                    logger.info("WALL ");
-                } else if (line.charAt(idx) == ' ') {
-                    logger.info("PASS ");
-                }
                 length = idx;
             }
-            logger.info(System.lineSeparator());
             width++;
         }
         return new Configure(cmd.getOptionValue("i", "examples/straight.maz.txt"), cmd.getOptionValue("p", "null"), length, width);

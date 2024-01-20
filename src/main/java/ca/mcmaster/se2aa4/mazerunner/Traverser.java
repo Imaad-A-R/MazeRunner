@@ -5,8 +5,19 @@ public class Traverser {
     public Traverser(String[][] map) {
     }
 
-    public String path() {
-        return "placeholder";
+    public String path(String[][] maze, int start, int end) {
+        int current_x = 0;
+        String pathing = "";
+        while (current_x!=maze[0].length-1){
+            if (maze[start][current_x+1].equals(" ")){
+                pathing = pathing+"F";
+                current_x++;
+            } else if (maze[start][current_x+1].equals("#")) {
+                pathing = "We crashed!";
+                return pathing;
+            }
+        }
+        return pathing;
     }
     public int findEnd(String[][] maze) {
         int end=0;
