@@ -17,7 +17,7 @@ public class Main {
         try {
             Configure config = configuring(args);
             MazeAnalyzer maze = new MazeAnalyzer();
-            String pathing = maze.arraymaker(config.file_name(), config.maze_length(), config.maze_width());
+            String pathing = maze.arraymaker(config.file_name(), config.test_path(), config.maze_length(), config.maze_width());
             String factorize = maze.factorize(pathing);
             System.out.println(pathing);
         } catch(ParseException | IOException e) {
@@ -32,8 +32,8 @@ public class Main {
             if (!(file_name.endsWith(".maz.txt"))){
                 throw new IllegalArgumentException("Please enter a valid file");
             }
-            else if (maze_length>1000 || maze_width>1000){
-                throw new IllegalArgumentException("Maze is too large");
+            if(test_path.isEmpty()){
+                throw new IllegalArgumentException("Please enter a valid path");
             }
         }
 

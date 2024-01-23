@@ -1,13 +1,12 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.*;
-import java.util.Objects;
 
 public class MazeAnalyzer {
 
     public MazeAnalyzer() {
     }
-    public String arraymaker(String file_name, int length, int width) throws IOException {
+    public String arraymaker(String file_name, String test_path, int length, int width) throws IOException {
         //declare 2d array which will contain maze
         String[][] maze = new String[width][length+1];
         //declare file reading stuff
@@ -31,11 +30,17 @@ public class MazeAnalyzer {
                 }
             }
         }
-        //define traverser objects and find start and end indexes
+        //define traverser objects and find start index
         Traverser travel = new Traverser(maze);
         int start = travel.findStart(maze);
-        int end = travel.findEnd(maze);
-        return travel.path(maze, start, end);
+
+        //decide whether to find a path or test a path
+        if (test_path.equals("null")){
+            return travel.findPath(maze, start);
+        }
+        else{
+            return travel.testPath(maze, start, test_path);
+        }
     }
     public String factorize(String canonical){
         return "factor placeholder";
