@@ -36,10 +36,10 @@ public class MazeAnalyzer {
 
         //decide whether to find a path or test a path
         if (test_path.equals("null")){
-            return travel.findPath(maze, start);
+            return travel.checkMaze(maze, start, test_path);
         }
         else{
-            return travel.testPath(maze, start, test_path);
+            return travel.checkMaze(maze, start, test_path);
         }
     }
     public String factorize(String canonical){
