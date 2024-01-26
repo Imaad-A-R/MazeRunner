@@ -13,12 +13,12 @@ public class Main {
 
     private static final Logger logger = LogManager.getLogger();
 
+    //main method which calls other methods and handles exceptions
     public static void main(String[] args) throws ParseException {
         try {
             Configure config = configuring(args);
             MazeAnalyzer maze = new MazeAnalyzer();
             String pathing = maze.arraymaker(config.file_name(), config.test_path(), config.maze_length(), config.maze_width());
-            String factorize = maze.factorize(pathing);
             System.out.println(pathing);
         } catch(ParseException | IOException e) {
             logger.error("/!\\ An error has occured /!\\");
@@ -26,7 +26,7 @@ public class Main {
         logger.info("** End of MazeRunner");
     }
 
-
+    //configure record and method to configure command line arguments away from main method
     private record Configure(String file_name, String test_path, int maze_length, int maze_width){
         Configure{
             if (!(file_name.endsWith(".maz.txt"))){
@@ -39,22 +39,27 @@ public class Main {
 
     }
     private static Configure configuring(String []args) throws IOException, ParseException {
+        //create new command line options i and p
         Options options = new Options();
         options.addOption("i", true, "Input argument for map");
         options.addOption("p", true, "Test a specific path");
         CommandLineParser parser = new DefaultParser();
+
         logger.info("** Starting Maze Runner");
         CommandLine cmd = parser.parse(options, args);
-        logger.info("**** Reading the maze from file " + cmd.getOptionValue("i", "examples/straight.maz.txt"));
+        logger.info("**** Reading maze from file " + cmd.getOptionValue("i", "examples/straight.maz.txt"));
         BufferedReader reader = new BufferedReader(new FileReader(cmd.getOptionValue("i", "examples/straight.maz.txt")));
+
+        //determine length and width while reading through the maze
         String line;
         int length=0, width=0;
         while ((line = reader.readLine()) != null) {
-            for (int idx = 0; idx < line.length(); idx++) {
-                length = idx;
+            for (int i = 0; i < line.length(); i++) {
+                length = i;
             }
             width++;
         }
+        //return configuration
         return new Configure(cmd.getOptionValue("i", "examples/straight.maz.txt"), cmd.getOptionValue("p", "null"), length, width);
     }
 }

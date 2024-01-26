@@ -9,6 +9,7 @@ public class MazeAnalyzer {
     public String arraymaker(String file_name, String test_path, int length, int width) throws IOException {
         //declare 2d array which will contain maze
         String[][] maze = new String[width][length+1];
+
         //declare file reading stuff
         FileReader reader = new FileReader(file_name);
         BufferedReader bufread = new BufferedReader(reader);
@@ -22,7 +23,7 @@ public class MazeAnalyzer {
             }
             j++;
         }
-        //convert nulls to spaces.
+        //convert nulls in the array to spaces.
         for (int i=0; i < maze.length; i++){
             for (int k=0; k<maze[0].length; k++){
                 if (maze[i][k]==null){
@@ -30,19 +31,12 @@ public class MazeAnalyzer {
                 }
             }
         }
+
         //define traverser objects and find start index
-        Traverser travel = new Traverser(maze);
+        Traverser travel = new Traverser();
         int start = travel.findStart(maze);
 
-        //decide whether to find a path or test a path
-        if (test_path.equals("null")){
-            return travel.checkMaze(maze, start, test_path);
-        }
-        else{
-            return travel.checkMaze(maze, start, test_path);
-        }
-    }
-    public String factorize(String canonical){
-        return "factor placeholder";
+        //call into the traverser method
+        return travel.checkMaze(maze, start, test_path);
     }
 }

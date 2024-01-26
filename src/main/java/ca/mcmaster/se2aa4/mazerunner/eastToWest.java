@@ -2,7 +2,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 public class eastToWest implements checkPath {
     @Override
-    public String testPath(String[][] maze, int start, String path){
+    public String testPath(String[][] maze, int end, String path){
         //rather than starting on the left side we start on the right side
         int current_x = maze.length-1;
         //our direction is opposite
@@ -21,28 +21,28 @@ public class eastToWest implements checkPath {
             for(int j=0; j<num; j++) {
                 if (path.charAt(i) == 'F') {
                     if ((direction % 4) == 0) {
-                        if (maze[start][current_x + 1].equals("#")) {
+                        if (maze[end][current_x + 1].equals("#")) {
                             return "incorrect path";
                         } else {
                             current_x++;
                         }
                     } else if (direction % 4 == 1 || direction % 4 == -3) {
-                        if (maze[start + 1][current_x].equals("#")) {
+                        if (maze[end + 1][current_x].equals("#")) {
                             return "incorrect path";
                         } else {
-                            start++;
+                            end++;
                         }
                     } else if (Math.abs(direction % 4) == 2) {
-                        if (maze[start][current_x - 1].equals("#")) {
+                        if (maze[end][current_x - 1].equals("#")) {
                             return "incorrect path";
                         } else {
                             current_x--;
                         }
                     } else if (direction % 4 == 3 || direction % 4 == -1) {
-                        if (maze[start - 1][current_x].equals("#")) {
+                        if (maze[end - 1][current_x].equals("#")) {
                             return "incorrect path";
                         } else {
-                            start--;
+                            end--;
                         }
                     }
                 } else if (path.charAt(i) == 'R') {

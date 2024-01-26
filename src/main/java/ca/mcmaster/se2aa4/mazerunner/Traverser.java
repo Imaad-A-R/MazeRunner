@@ -2,10 +2,11 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 public class Traverser {
 
-    public Traverser(String[][] map) {
+    public Traverser() {
     }
 
     public String checkMaze(String[][] maze, int start, String test_path) {
+
         //first create our objects which will be used to evaluate the business logic
         findPath pathfinder = new rightHand();
         checkPath firstChecker = new westToEast();
