@@ -11,25 +11,28 @@ public class Traverser {
         findPath pathfinder = new rightHand();
         checkPath firstChecker = new westToEast();
 
-        //if there is no path to test then find a path for the user
-        if(test_path.equals("null")){
-            return pathfinder.find(maze, start);
-        }
-        //if there is a path to test then check that path
-        else{
-            int end = findEnd(maze);
-
-            //check west to east and see if user path works
-            String answer = firstChecker.testPath(maze, start, test_path);
-
-            //if user path doesn't work west to east then check east to west
-            if (answer.equals("incorrect path")){
-                checkPath secondChecker = new eastToWest();
-                return secondChecker.testPath(maze, end, test_path);
+        try {
+            //if there is no path to test then find a path for the user
+            if (test_path.equals("null")) {
+                return pathfinder.find(maze, start);
             }
-            else{
-                return firstChecker.testPath(maze, start, test_path);
+            //if there is a path to test then check that path
+            else {
+                int end = findEnd(maze);
+
+                //check west to east and see if user path works
+                String answer = firstChecker.testPath(maze, start, test_path);
+
+                //if user path doesn't work west to east then check east to west
+                if (answer.equals("incorrect path")) {
+                    checkPath secondChecker = new eastToWest();
+                    return secondChecker.testPath(maze, end, test_path);
+                } else {
+                    return firstChecker.testPath(maze, start, test_path);
+                }
             }
+        }catch(ArrayIndexOutOfBoundsException e){
+            return "/!\\ An error has occured /!\\";
         }
     }
 
