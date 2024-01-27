@@ -29,7 +29,7 @@ public class Main {
     //configure record and method to configure command line arguments away from main method
     private record Configure(String file_name, String test_path, int maze_length, int maze_width){
         Configure{
-            if (!(file_name.endsWith(".maz.txt"))){
+            if (!(file_name.endsWith(".txt"))){
                 throw new IllegalArgumentException("Please enter a valid file");
             }
             if(test_path.isEmpty()){

@@ -133,6 +133,6 @@ public class rightHand implements findPath {
             }
             current = canonical.charAt(i);
         }
-        return factored;
+        return factored.substring(1);
     }
 }
