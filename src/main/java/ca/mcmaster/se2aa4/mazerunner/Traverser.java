@@ -2,14 +2,11 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 public class Traverser {
 
-    public Traverser() {
-    }
-
     public String checkMaze(String[][] maze, int start, String test_path) {
 
         //first create our objects which will be used to evaluate the business logic
-        findPath pathfinder = new rightHand();
-        checkPath firstChecker = new westToEast();
+        FindPath pathfinder = new RightHand();
+        CheckPath firstChecker = new WestToEast();
 
         try {
             //if there is no path to test then find a path for the user
@@ -25,7 +22,7 @@ public class Traverser {
 
                 //if user path doesn't work west to east then check east to west
                 if (answer.equals("incorrect path")) {
-                    checkPath secondChecker = new eastToWest();
+                    CheckPath secondChecker = new EastToWest();
                     return secondChecker.testPath(maze, end, test_path);
                 } else {
                     return firstChecker.testPath(maze, start, test_path);

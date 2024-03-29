@@ -1,6 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-public class eastToWest implements checkPath {
+public class EastToWest implements CheckPath {
     @Override
     public String testPath(String[][] maze, int end, String path){
         //rather than starting on the left side we start on the right side
