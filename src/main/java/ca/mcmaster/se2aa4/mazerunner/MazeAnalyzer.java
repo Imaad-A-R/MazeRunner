@@ -1,17 +1,19 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import ca.mcmaster.se2aa4.mazerunner.Configuration.ProgramGuide;
+
 import java.io.*;
 
 public class MazeAnalyzer {
 
     public MazeAnalyzer() {
     }
-    public String arraymaker(String file_name, String test_path, int length, int width) throws IOException {
+    public String arraymaker(ProgramGuide guideInfo) throws IOException {
         //declare 2d array which will contain maze
-        String[][] maze = new String[width][length+1];
+        String[][] maze = new String[guideInfo.maze_width][guideInfo.maze_length+1];
 
         //declare file reading stuff
-        FileReader reader = new FileReader(file_name);
+        FileReader reader = new FileReader(guideInfo.file_name);
         BufferedReader bufread = new BufferedReader(reader);
         String line;
         int j=0;
@@ -37,6 +39,6 @@ public class MazeAnalyzer {
         int start = travel.findStart(maze);
 
         //call into the traverser method
-        return travel.checkMaze(maze, start, test_path);
+        return travel.checkMaze(maze, start, guideInfo.test_path, guideInfo.method);
     }
 }

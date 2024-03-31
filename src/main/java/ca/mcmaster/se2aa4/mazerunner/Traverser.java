@@ -2,21 +2,25 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 public class Traverser {
 
-    public String checkMaze(String[][] maze, int start, String test_path) {
+    public String checkMaze(String[][] maze, int start, String test_path, String method) {
 
         //first create our objects which will be used to evaluate the business logic
-        FindPath pathfinder = new RightHand();
+        FindPath pathfinder;
         CheckPath firstChecker = new WestToEast();
 
         try {
             //if there is no path to test then find a path for the user
-            if (test_path.equals("null")) {
+            if (test_path.equals("null") && method.equals("righthand")) {
+                pathfinder = new RightHand();
                 return pathfinder.find(maze, start);
+            } else if (test_path.equals("null") && method.equals("fast")) {
+                pathfinder = new FastMethod();
+                return pathfinder.find(maze,start);
             }
             //if there is a path to test then check that path
             else {
                 int end = findEnd(maze);
-
+                
                 //check west to east and see if user path works
                 String answer = firstChecker.testPath(maze, start, test_path);
 

@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import ca.mcmaster.se2aa4.mazerunner.Configuration.Configure;
+import ca.mcmaster.se2aa4.mazerunner.Configuration.ProgramGuide;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,9 +18,10 @@ public class Main {
     //main method which calls other methods and handles exceptions
     public static void main(String[] args) throws ParseException {
         try {
-            Configure config = configuring(args);
+            Configure config = new Configure();
+            ProgramGuide guideInfo = config.createConfig(args);
             MazeAnalyzer maze = new MazeAnalyzer();
-            String pathing = maze.arraymaker(config.file_name(), config.test_path(), config.maze_length(), config.maze_width());
+            String pathing = maze.arraymaker(guideInfo);
             System.out.println(pathing);
         } catch(ParseException | IOException e) {
             logger.error("/!\\ An error has occured /!\\");
@@ -26,6 +29,7 @@ public class Main {
         logger.info("** End of MazeRunner");
     }
 
+    /*
     //configure record and method to configure command line arguments away from main method
     private record Configure(String file_name, String test_path, int maze_length, int maze_width){
         Configure{
@@ -64,4 +68,6 @@ public class Main {
         //return configuration
         return new Configure(cmd.getOptionValue("i", "examples/straight.maz.txt"), cmd.getOptionValue("p", "null"), length, width);
     }
+
+     */
 }
