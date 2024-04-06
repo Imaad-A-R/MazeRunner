@@ -1,13 +1,12 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import ca.mcmaster.se2aa4.mazerunner.Configuration.ProgramGuide;
+import ca.mcmaster.se2aa4.mazerunner.configuration.ProgramGuide;
 
 import java.io.*;
 
 public class MazeAnalyzer {
 
-    public MazeAnalyzer() {
-    }
+
     public String arraymaker(ProgramGuide guideInfo) throws IOException {
         //declare 2d array which will contain maze
         String[][] maze = new String[guideInfo.maze_width][guideInfo.maze_length+1];

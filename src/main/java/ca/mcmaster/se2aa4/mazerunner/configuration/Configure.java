@@ -1,4 +1,4 @@
-package ca.mcmaster.se2aa4.mazerunner.Configuration;
+package ca.mcmaster.se2aa4.mazerunner.configuration;
 
 
 

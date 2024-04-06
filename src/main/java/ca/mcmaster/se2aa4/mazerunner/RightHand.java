@@ -4,7 +4,7 @@ public class RightHand implements FindPath {
 
     //this is the exploration implemented using the dumb right hand rule
     @Override
-    public String find(String[][] maze, int start){
+    public String find(String[][] maze, int start, int end){
         int current_x = 0;
         String pathing = "";
         int direction = 0;
@@ -98,41 +98,5 @@ public class RightHand implements FindPath {
 
         //return the factorized path
         return factorize(pathing);
-    }
-
-    //algorithm to convert the canonical form to the factorized form
-    @Override
-    public String factorize(String canonical){
-        String factored = "";
-        int total = 1;
-        //look at the first element
-        char current = canonical.charAt(0);
-
-        //compare the last element with the for loop one, increasing a count and printing only when they don't match
-        for (int i=1; i<canonical.length(); i++){
-            if (canonical.charAt(i)==current){
-                total++;
-
-                //these if statements are purely for the case where we are on the last element
-                if (i==canonical.length()-1){
-                    factored = factored+" "+total+canonical.charAt(i);
-                }
-            }
-            else if(canonical.charAt(i)!=current && total>=2){
-                factored = factored+" "+total+current;
-                total=1;
-                if (i==canonical.length()-1){
-                    factored = factored+" "+canonical.charAt(i);
-                }
-            }
-            else{
-                factored=factored+" "+current;
-                if (i==canonical.length()-1){
-                    factored = factored+" "+canonical.charAt(i);
-                }
-            }
-            current = canonical.charAt(i);
-        }
-        return factored.substring(1);
     }
 }

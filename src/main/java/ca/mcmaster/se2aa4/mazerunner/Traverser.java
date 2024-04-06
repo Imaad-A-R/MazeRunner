@@ -7,20 +7,19 @@ public class Traverser {
         //first create our objects which will be used to evaluate the business logic
         FindPath pathfinder;
         CheckPath firstChecker = new WestToEast();
+        int end = findEnd(maze);
 
         try {
             //if there is no path to test then find a path for the user
             if (test_path.equals("null") && method.equals("righthand")) {
                 pathfinder = new RightHand();
-                return pathfinder.find(maze, start);
+                return pathfinder.find(maze, start, end);
             } else if (test_path.equals("null") && method.equals("fast")) {
                 pathfinder = new FastMethod();
-                return pathfinder.find(maze,start);
+                return pathfinder.find(maze,start, end);
             }
             //if there is a path to test then check that path
             else {
-                int end = findEnd(maze);
-                
                 //check west to east and see if user path works
                 String answer = firstChecker.testPath(maze, start, test_path);
 
@@ -52,7 +51,7 @@ public class Traverser {
     private int findEnd(String[][] maze){
         int end=0;
         for (int i=0; i<maze.length; i++){
-            if (maze[i][maze.length-1].equals(" ")){
+            if (maze[i][maze[0].length-1].equals(" ")){
                 end = i;
             }
         }

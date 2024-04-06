@@ -1,12 +1,9 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
-import ca.mcmaster.se2aa4.mazerunner.Configuration.Configure;
-import ca.mcmaster.se2aa4.mazerunner.Configuration.ProgramGuide;
+import ca.mcmaster.se2aa4.mazerunner.configuration.Configure;
+import ca.mcmaster.se2aa4.mazerunner.configuration.ProgramGuide;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
