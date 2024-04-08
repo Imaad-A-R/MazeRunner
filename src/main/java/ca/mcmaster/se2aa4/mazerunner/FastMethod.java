@@ -32,7 +32,7 @@ public class FastMethod implements FindPath {
             reachedEnd = currentCoords.x+1==maze[0].length-1 && currentCoords.y==end;
         }
         BackTracker pathDeterminer = new BackTracker();
-        return factorize(pathDeterminer.calculateSteps(pathTracker, end));
+        return pathDeterminer.calculateSteps(pathTracker, end);
     }
 
     private void checkNodeLeft(Coordinates currentCoords, String[][] maze) {

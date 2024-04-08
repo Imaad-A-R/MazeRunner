@@ -1,9 +1,11 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.text.DecimalFormat;
+
 public class Traverser {
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
-    public String checkMaze(String[][] maze, int start, String test_path, String method) {
-
+    public String checkMaze(String[][] maze, int start, String test_path, String method, String baseline) {
         //first create our objects which will be used to evaluate the business logic
         FindPath pathfinder;
         CheckPath firstChecker = new WestToEast();
@@ -11,12 +13,17 @@ public class Traverser {
 
         try {
             //if there is no path to test then find a path for the user
-            if (test_path.equals("null") && method.equals("righthand")) {
+            if (test_path.equals("null") && method.equals("righthand") && baseline.equals("null")) {
                 pathfinder = new RightHand();
-                return pathfinder.find(maze, start, end);
-            } else if (test_path.equals("null") && method.equals("fast")) {
+                String path = pathfinder.find(maze, start, end);
+                return pathfinder.factorize(path);
+            } else if (test_path.equals("null") && method.equals("fast") && baseline.equals("null")) {
                 pathfinder = new FastMethod();
-                return pathfinder.find(maze,start, end);
+                String path = pathfinder.find(maze, start, end);
+                return pathfinder.factorize(path);
+            }
+            else if (test_path.equals("null")){
+                return baselineComparison(maze, start, method, baseline);
             }
             //if there is a path to test then check that path
             else {
@@ -34,6 +41,34 @@ public class Traverser {
         }catch(ArrayIndexOutOfBoundsException e){
             return "/!\\ An error has occured /!\\";
         }
+    }
+
+    private String baselineComparison(String[][] maze, int start, String method, String baseline) {
+
+        FindPath firstMethod;
+        FindPath secondMethod;
+        if (method.equals("righthand")){
+            firstMethod = new RightHand();
+        }
+        else{
+            firstMethod = new FastMethod();
+        }
+        if (baseline.equals("righthand")){
+            secondMethod = new RightHand();
+        }
+        else{
+            secondMethod = new FastMethod();
+        }
+
+        double startTime = System.currentTimeMillis();
+        String normalPath = firstMethod.find(maze, start, findEnd(maze));
+        System.out.println("Time for method: "+df.format((System.currentTimeMillis()-startTime)));
+
+        startTime = System.currentTimeMillis();
+        String baselinePath = secondMethod.find(maze, start, findEnd(maze));
+        System.out.println("Time for baseline: "+df.format((System.currentTimeMillis()-startTime)));
+
+        return "Speedup: "+ df.format((double) baselinePath.length() / normalPath.length());
     }
 
     //method which determines the start of the maze

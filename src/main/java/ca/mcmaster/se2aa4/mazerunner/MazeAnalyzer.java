@@ -38,6 +38,6 @@ public class MazeAnalyzer {
         int start = travel.findStart(maze);
 
         //call into the traverser method
-        return travel.checkMaze(maze, start, guideInfo.test_path, guideInfo.method);
+        return travel.checkMaze(maze, start, guideInfo.test_path, guideInfo.method, guideInfo.baseline);
     }
 }

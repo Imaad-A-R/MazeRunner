@@ -14,17 +14,18 @@ public class WestToEast implements CheckPath {
 
         //increment through the path that the user provides us
         for (int i=0; i<path.length(); i++){
-
-            //if the user gives us a number, then do the next char in the path that amount of times
-            if (path.charAt(i)>='2' && path.charAt(i)<='9' && i+1<path.length()){
-                num=path.charAt(i)-48;
-                i=i+1;
+            if (path.charAt(i)>='0' && path.charAt(i)<='9' && i+1<path.length()){
+                num=0;
             }
             else{
                 num=1;
             }
+            while (path.charAt(i)>='0' && path.charAt(i)<='9' && i+1<path.length()){
+                num = (num*10)+(path.charAt(i)-48);
+                i=i+1;
+            }
             //depending on the current char and direction, check if the next step is a wall or not
-            for(int j=0; j<num; j++) {
+            for(int j=0; j<num; j++){
 
                 //moving forward varies based on direction
                 if (path.charAt(i) == 'F') {

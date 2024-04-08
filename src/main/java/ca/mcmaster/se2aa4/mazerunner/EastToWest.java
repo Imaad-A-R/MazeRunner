@@ -11,12 +11,15 @@ public class EastToWest implements CheckPath {
 
         //our traversing code is the exact same as west to east, but with different values plugged in
         for (int i=0; i<path.length(); i++){
-            if (path.charAt(i)>='2' && path.charAt(i)<='9' && i+1<path.length()){
-                num=path.charAt(i)-48;
-                i=i+1;
+            if (path.charAt(i)>='0' && path.charAt(i)<='9' && i+1<path.length()){
+                num=0;
             }
             else{
                 num=1;
+            }
+            while (path.charAt(i)>='0' && path.charAt(i)<='9' && i+1<path.length()){
+                num = (num*10)+(path.charAt(i)-48);
+                i=i+1;
             }
             for(int j=0; j<num; j++) {
                 if (path.charAt(i) == 'F') {

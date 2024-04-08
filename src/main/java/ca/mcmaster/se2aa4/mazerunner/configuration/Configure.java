@@ -14,6 +14,7 @@ public class Configure {
         options.addOption("i", true, "Input argument for map");
         options.addOption("p", true, "Test a specific path");
         options.addOption("method", true, "Algorithm for finding path");
+        options.addOption("baseline", true, "Algorithm to check as baseline");
         CommandLineParser parser = new DefaultParser();
 
         logger.info("** Starting Maze Runner");
@@ -31,6 +32,6 @@ public class Configure {
             }
             width++;
         }
-        return new ProgramGuide(cmd.getOptionValue("i", "examples/straight.maz.txt"), cmd.getOptionValue("p", "null"), cmd.getOptionValue("method", "righthand"), length, width);
+        return new ProgramGuide(cmd.getOptionValue("i", "examples/straight.maz.txt"), cmd.getOptionValue("p", "null"), cmd.getOptionValue("method", "fast"), length, width, cmd.getOptionValue("baseline", "null"));
     }
 }

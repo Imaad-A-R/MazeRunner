@@ -97,6 +97,6 @@ public class RightHand implements FindPath {
         }
 
         //return the factorized path
-        return factorize(pathing);
+        return pathing;
     }
 }
