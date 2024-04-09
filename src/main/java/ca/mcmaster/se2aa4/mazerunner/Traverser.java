@@ -83,7 +83,7 @@ public class Traverser {
     }
 
     //method which determines end of the maze. This is used later for checking an east to west solution provided by the user.
-    private int findEnd(String[][] maze){
+    public int findEnd(String[][] maze){
         int end=0;
         for (int i=0; i<maze.length; i++){
             if (maze[i][maze[0].length-1].equals(" ")){
