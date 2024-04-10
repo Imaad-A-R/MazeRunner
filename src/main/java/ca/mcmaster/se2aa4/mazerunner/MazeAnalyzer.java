@@ -3,11 +3,13 @@ package ca.mcmaster.se2aa4.mazerunner;
 import ca.mcmaster.se2aa4.mazerunner.configuration.ProgramGuide;
 
 import java.io.*;
+import java.text.DecimalFormat;
 
 public class MazeAnalyzer {
-
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public String arraymaker(ProgramGuide guideInfo) throws IOException {
+        double startTime = System.currentTimeMillis();
         //declare 2d array which will contain maze
         String[][] maze = new String[guideInfo.maze_width][guideInfo.maze_length+1];
 
@@ -37,6 +39,9 @@ public class MazeAnalyzer {
         Traverser travel = new Traverser();
         int start = travel.findStart(maze);
 
+        if (!guideInfo.baseline.equals("null")){
+            System.out.println("Time for maze loading: "+df.format((System.currentTimeMillis()-startTime)));
+        }
         //call into the traverser method
         return travel.checkMaze(maze, start, guideInfo.test_path, guideInfo.method, guideInfo.baseline);
     }
