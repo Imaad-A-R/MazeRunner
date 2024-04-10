@@ -20,8 +20,9 @@ public class PathfinderTest {
                             {"#","#","#"," "," "," ","#",},
                             {"#","#","#","#","#","#","#",}};
         Traverser travel = new Traverser();
-        int start = travel.findStart(maze);
-        int end = travel.findEnd(maze);
+        KeyPointFinder finder = new KeyPointFinder();
+        int start = finder.findStart(maze);
+        int end = finder.findEnd(maze);
         FindPath pathfinder = new FastMethod();
         String path = pathfinder.find(maze, start, end);
 

@@ -37,12 +37,11 @@ public class MazeAnalyzer {
 
         //define traverser objects and find start index
         Traverser travel = new Traverser();
-        int start = travel.findStart(maze);
 
         if (!guideInfo.baseline.equals("null")){
             System.out.println("Time for maze loading: "+df.format((System.currentTimeMillis()-startTime)));
         }
         //call into the traverser method
-        return travel.checkMaze(maze, start, guideInfo.test_path, guideInfo.method, guideInfo.baseline);
+        return travel.checkMaze(maze, guideInfo.test_path, guideInfo.method, guideInfo.baseline);
     }
 }

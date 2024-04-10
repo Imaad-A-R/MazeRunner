@@ -4,39 +4,40 @@ import java.text.DecimalFormat;
 
 public class Traverser {
     private static final DecimalFormat df = new DecimalFormat("0.00");
+    private final KeyPointFinder finder = new KeyPointFinder();
 
-    public String checkMaze(String[][] maze, int start, String test_path, String method, String baseline) {
-        //first create our objects which will be used to evaluate the business logic
+    public String checkMaze(String[][] maze, String test_path, String method, String baseline) {
+
+
+        //first create our objects for path finding and get start and end
         FindPath pathfinder;
-        CheckPath firstChecker = new WestToEast();
-        int end = findEnd(maze);
+        int end = finder.findEnd(maze);
+        int start = finder.findStart(maze);
 
         try {
-            //if there is no path to test then find a path for the user
-            if (test_path.equals("null") && method.equals("righthand") && baseline.equals("null")) {
+            //first check if path to test
+            if (!test_path.equals("null")){
+                return testAPath(maze, start, end, test_path);
+            }
+            //then check for baseline
+            else if (!baseline.equals("null")){
+                return baselineComparison(maze, start, method, baseline);
+            }
+
+
+            //if there is no path to test, no baseline and we are using righthand
+            if (method.equals("righthand")) {
                 pathfinder = new RightHand();
                 String path = pathfinder.find(maze, start, end);
                 return pathfinder.factorize(path);
-            } else if (test_path.equals("null") && method.equals("fast") && baseline.equals("null")) {
+            //if there is no path to test, no baseline, and we are using fast
+            } else if (method.equals("fast")) {
                 pathfinder = new FastMethod();
                 String path = pathfinder.find(maze, start, end);
                 return pathfinder.factorize(path);
             }
-            else if (test_path.equals("null")){
-                return baselineComparison(maze, start, method, baseline);
-            }
-            //if there is a path to test then check that path
-            else {
-                //check west to east and see if user path works
-                String answer = firstChecker.testPath(maze, start, test_path);
-
-                //if user path doesn't work west to east then check east to west
-                if (answer.equals("incorrect path")) {
-                    CheckPath secondChecker = new EastToWest();
-                    return secondChecker.testPath(maze, end, test_path);
-                } else {
-                    return firstChecker.testPath(maze, start, test_path);
-                }
+            else{
+                throw new IllegalArgumentException("Enter a valid method {fast, righthand}");
             }
         }catch(ArrayIndexOutOfBoundsException e){
             return "/!\\ An error has occured /!\\";
@@ -44,7 +45,6 @@ public class Traverser {
     }
 
     private String baselineComparison(String[][] maze, int start, String method, String baseline) {
-
         FindPath firstMethod;
         FindPath secondMethod;
         if (method.equals("righthand")){
@@ -61,36 +61,28 @@ public class Traverser {
         }
 
         double startTime = System.currentTimeMillis();
-        String normalPath = firstMethod.find(maze, start, findEnd(maze));
+        String normalPath = firstMethod.find(maze, start, finder.findEnd(maze));
         System.out.println("Time for method: "+df.format((System.currentTimeMillis()-startTime)));
 
         startTime = System.currentTimeMillis();
-        String baselinePath = secondMethod.find(maze, start, findEnd(maze));
+        String baselinePath = secondMethod.find(maze, start, finder.findEnd(maze));
         System.out.println("Time for baseline: "+df.format((System.currentTimeMillis()-startTime)));
 
         return "Speedup: "+ df.format((double) baselinePath.length() / normalPath.length());
     }
 
-    //method which determines the start of the maze
-    public int findStart(String[][] maze){
-        int start=0;
-        for (int i=0; i<maze.length; i++){
-            if (maze[i][0].equals(" ")){
-                start = i;
-            }
-        }
-        return start;
-    }
+    private String testAPath(String [][] maze, int start, int end, String test_path){
+        CheckPath firstChecker = new WestToEast();
+        //check west to east and see if user path works
+        String answer = firstChecker.testPath(maze, start, test_path);
 
-    //method which determines end of the maze. This is used later for checking an east to west solution provided by the user.
-    public int findEnd(String[][] maze){
-        int end=0;
-        for (int i=0; i<maze.length; i++){
-            if (maze[i][maze[0].length-1].equals(" ")){
-                end = i;
-            }
+        //if user path doesn't work west to east then check east to west
+        if (answer.equals("incorrect path")) {
+            CheckPath secondChecker = new EastToWest();
+            return secondChecker.testPath(maze, end, test_path);
+        } else {
+            return firstChecker.testPath(maze, start, test_path);
         }
-        return end;
     }
 
 }
