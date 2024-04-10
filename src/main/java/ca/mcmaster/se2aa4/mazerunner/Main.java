@@ -17,8 +17,8 @@ public class Main {
         try {
             Configure config = new Configure();
             ProgramGuide guideInfo = config.createConfig(args);
-            MazeAnalyzer maze = new MazeAnalyzer();
-            String pathing = maze.arraymaker(guideInfo);
+            MazeAnalyzer mazeAnalyzer = new MazeAnalyzer();
+            String pathing = mazeAnalyzer.arraymaker(guideInfo);
             System.out.println(pathing);
         } catch(ParseException | IOException e) {
             logger.error("/!\\ An error has occured /!\\");

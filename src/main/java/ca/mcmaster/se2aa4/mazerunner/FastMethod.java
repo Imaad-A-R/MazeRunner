@@ -14,6 +14,7 @@ public class FastMethod implements FindPath {
         coordQueue = new LinkedList<>();
     }
     public String find(String[][] maze, int start, int end){
+        //BFS setup stuff
         boolean reachedEnd = false;
         pathTracker = new Coordinates[maze.length][maze[0].length];
         marked = new boolean[maze.length][maze[0].length];
@@ -22,7 +23,7 @@ public class FastMethod implements FindPath {
         marked [start][1] = true;
         marked [start][0] = true;
 
-
+        //BFS traversal
         while (!reachedEnd && !coordQueue.isEmpty()){
             Coordinates currentCoords = coordQueue.remove();
             checkNodeBelow(currentCoords, maze);
@@ -31,6 +32,7 @@ public class FastMethod implements FindPath {
             checkNodeRight(currentCoords, maze);
             reachedEnd = currentCoords.x+1==maze[0].length-1 && currentCoords.y==end;
         }
+        //backtrack to calculate path
         BackTracker pathDeterminer = new BackTracker();
         return pathDeterminer.calculateSteps(pathTracker, end);
     }
