@@ -3,7 +3,8 @@
   * [Imaad Abdul-Razzak](imaadar@gmail.com)
   * **Program**: B. Eng. In Software Engineering
   * **Course code**: SFWRENG 2AA4
-  * **Course Title**: Software Design I - Introduction to Software Development 
+  * **Course Title**: Software Design I - Introduction to Software Development
+  * **Professor**: Dr. Sébastien Mosser
   * Term: *Level II - Winter 2024*
 
 ## Business Logic Specification
