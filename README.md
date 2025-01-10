@@ -1,6 +1,6 @@
 # Maze Runner
 
-  * [Imaad Abdul-Razzak](imaadar@gmail.com)
+  * **Made By**: [Imaad Abdul-Razzak](imaadar@gmail.com)
   * **Program**: B. Eng. In Software Engineering
   * **Course code**: SFWRENG 2AA4
   * **Course Title**: Software Design I - Introduction to Software Development
